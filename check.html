@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotech Computers - Your Technology Partner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --bright-red: #FF3B30;
+            --silver: #C0C0C0;
+            --medium-gray: #808080;
+            --dark-gray: #333333;
+            --light-gray: #F5F5F5;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--bright-red);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--bright-red);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--bright-red);
+        }
+
+        /* Slider Styles - Full Screen */
+        .slider {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out; /* Faster transition */
+        }
+
+        .slide {
+            width: 20%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .slide-content h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--bright-red);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e02e24;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-dot.active {
+            background-color: white;
+        }
+
+        /* Video Section - Bright Version */
+        .video-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--medium-gray) 100%);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1) contrast(1) saturate(1.1);
+        }
+
+        .video-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-content h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .video-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .video-btn {
+            display: inline-block;
+            background-color: var(--bright-red);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--bright-red);
+        }
+
+        .video-btn:hover {
+            background-color: transparent;
+            color: var(--bright-red);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 59, 48, 0.4);
+        }
+
+        /* About Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--bright-red);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--medium-gray);
+        }
+
+        /* Updated About Images - Single Image Carousel */
+        .about-images {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-carousel {
+            height: 100%;
+            position: relative;
+        }
+
+        .about-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: translateY(20px);
+        }
+
+        .about-img.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-carousel-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .about-carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .about-carousel-dot.active {
+            background-color: white;
+        }
+
+        /* Products Section */
+        .products-section {
+            background-color: var(--silver);
+        }
+
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background-color: white;
+            border: 2px solid var(--bright-red);
+            color: var(--bright-red);
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--bright-red);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            display: inline-block;
+            background-color: #FFE5E3;
+            color: var(--bright-red);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--bright-red);
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        .product-features li {
+            margin-bottom: 5px;
+            color: var(--medium-gray);
+            font-size: 14px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--bright-red);
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-to-cart {
+            background-color: var(--bright-red);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e02e24;
+        }
+
+        .wishlist {
+            background-color: transparent;
+            border: 1px solid var(--silver);
+            color: var(--medium-gray);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wishlist:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--bright-red);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--bright-red);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--silver);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--bright-red);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--bright-red);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--medium-gray);
+            color: var(--silver);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-images {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .slide-content h2, .video-content h2 {
+                font-size: 32px;
+            }
+            
+            .slide-content p, .video-content p {
+                font-size: 16px;
+            }
+            
+            .slider, .video-section {
+                height: 70vh;
+            }
+            
+            .product-filters {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .filter-btn {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .slider, .video-section {
+                height: 60vh;
+            }
+            
+            .slide-content h2, .video-content h2 {
+                font-size: 24px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .about-images {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <!-- Placeholder for logo - replace with actual logo -->
+                <div style="width: 50px; height: 50px; background: var(--bright-red); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">RC</div>
+                <h1>Rotech Computers</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="laptop.html">Laptops</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/share/1HRkgRrQqf/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/rotech_technologies?igsh=eWRxMzkxa241NWl4"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@rotech.computer.t?_r=1&_t=ZS-91CHZNAsZg0"><i class="fab fa-tiktok"></i></a>
+                <a href="https://maps.google.com?q=Rotech%20Computer%20technologies,%20310/3%20Kimbulapitiya%20Rd,%20Negombo&ftid=0x3ae2eff6701c9fef:0x423df204861751f&entry=gps&lucs=,94284463,94224825,94227247,94227248,94231188,47071704,47069508,94273883,94218641,94282134,94203019,47084304,94286863&g_st=ipc"><i class="fas fa-map-marker-alt"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Slider -->
+    <section class="slider">
+        <div class="slides">
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+                <div class="slide-content">
+                    <h2>Premium Gaming Laptops</h2>
+                    <p>Experience ultimate performance with our latest gaming laptops featuring RTX graphics</p>
+                    <a href="#" class="btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80');">
+                <div class="slide-content">
+                    <h2>Custom Built PCs</h2>
+                    <p>Build your dream PC with our expert technicians and premium components</p>
+                    <a href="#" class="btn">Build My PC</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+                <div class="slide-content">
+                    <h2>Mobiles Apps</h2>
+                    <p>Save money without compromising on quality with our certified pre-owned devices</p>
+                    <a href="#" class="btn">Browse Pre-Owned</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80');">
+                <div class="slide-content">
+                    <h2>Expert Repair Services</h2>
+                    <p>Fast and reliable repair services for all your computer and mobile devices</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80');">
+                <div class="slide-content">
+                    <h2>Latest Accessories</h2>
+                    <p>Enhance your setup with our premium selection of computer accessories</p>
+                    <a href="#" class="btn">Shop Accessories</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+            <div class="slider-dot"></div>
+        </div>
+    </section>
+
+    <!-- Video Section - Bright Version -->
+    <section class="video-section">
+        <div class="video-container">
+            <video class="video-bg" autoplay muted loop playsinline>
+                <!-- Replace with your actual video file -->
+                <source src="pictures/final.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-content">
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Rotech Computers</h2>
+                <p>Your trusted technology partner since 2010</p>
+            </div>
+            <div class="about-content">
+                <div class="about-images">
+                    <div class="about-carousel">
+                        <div class="about-img active">
+                            <img src="https://images.unsplash.com/photo-1563013546-7e58a73c503b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" alt="Our Store">
+                        </div>
+                        <div class="about-img">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Our Team">
+                        </div>
+                        <div class="about-img">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Our Services">
+                        </div>
+                    </div>
+                    <div class="about-carousel-nav">
+                        <div class="about-carousel-dot active"></div>
+                        <div class="about-carousel-dot"></div>
+                        <div class="about-carousel-dot"></div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Why Choose Rotech Computers?</h3>
+                    <p>Founded in 2010, Rotech Computers has been at the forefront of providing cutting-edge technology solutions to both individual consumers and businesses. Our mission is to make technology accessible, reliable, and affordable for everyone.</p>
+                    <p>We specialize in custom PC builds, laptop sales, computer repairs, and a wide range of accessories. Our team of certified technicians ensures that every product and service meets the highest standards of quality.</p>
+                    <p>At Rotech Computers, we believe in building lasting relationships with our customers through exceptional service, expert advice, and ongoing support. Whether you're a gamer, creative professional, or business user, we have the perfect solution for your needs.</p>
+                    <a href="#" class="btn">Learn More About Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Products</h2>
+                <p>Explore our wide range of new and pre-owned devices</p>
+            </div>
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="new">Brand New Products</button>
+                <button class="filter-btn" data-filter="used">Used Products</button>
+            </div>
+            <div class="products-grid">
+                <!-- Brand New Products -->
+                <div class="product-card new-product" onclick="openProductPage('rog-strix')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="Gaming Laptop">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Laptop</span>
+                        <h3 class="product-name">ROG Strix Gaming Laptop</h3>
+                        <div class="product-price">$1,299.99</div>
+                        <ul class="product-features">
+                            <li>Intel Core i7-12700H Processor</li>
+                            <li>NVIDIA GeForce RTX 3060</li>
+                            <li>16GB DDR5 RAM, 1TB SSD</li>
+                            <li>15.6" FHD 144Hz Display</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card new-product" onclick="openProductPage('custom-pc')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="Custom PC">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Desktop</span>
+                        <h3 class="product-name">Custom Gaming PC</h3>
+                        <div class="product-price">$1,899.99</div>
+                        <ul class="product-features">
+                            <li>AMD Ryzen 7 5800X</li>
+                            <li>NVIDIA GeForce RTX 4070</li>
+                            <li>32GB DDR4 RAM, 2TB NVMe SSD</li>
+                            <li>Liquid Cooling, RGB Lighting</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card new-product" onclick="openProductPage('macbook-pro')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="MacBook Pro">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Laptop</span>
+                        <h3 class="product-name">Apple MacBook Pro 16"</h3>
+                        <div class="product-price">$2,399.99</div>
+                        <ul class="product-features">
+                            <li>Apple M2 Pro Chip</li>
+                            <li>16GB Unified Memory</li>
+                            <li>1TB SSD Storage</li>
+                            <li>16.2-inch Liquid Retina XDR Display</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card new-product" onclick="openProductPage('wireless-headset')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="Wireless Headset">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Accessory</span>
+                        <h3 class="product-name">Fuxi H7 Wireless Headset</h3>
+                        <div class="product-price">$89.99</div>
+                        <ul class="product-features">
+                            <li>Wireless & Bluetooth Connectivity</li>
+                            <li>High-Quality Audio with Noise Cancellation</li>
+                            <li>Comfortable Over-Ear Design</li>
+                            <li>Up to 30 Hours Battery Life</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Used Products -->
+                <div class="product-card used-product" onclick="openProductPage('refurbished-dell')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="Pre-Owned Laptop">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Pre-Owned</span>
+                        <h3 class="product-name">Refurbished Dell XPS 13</h3>
+                        <div class="product-price">$699.99</div>
+                        <ul class="product-features">
+                            <li>Intel Core i5-1135G7</li>
+                            <li>Intel Iris Xe Graphics</li>
+                            <li>8GB RAM, 512GB SSD</li>
+                            <li>13.4" FHD+ Display</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card used-product" onclick="openProductPage('used-macbook')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="Used MacBook">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Pre-Owned</span>
+                        <h3 class="product-name">Used MacBook Air M1</h3>
+                        <div class="product-price">$799.99</div>
+                        <ul class="product-features">
+                            <li>Apple M1 Chip</li>
+                            <li>8GB Unified Memory</li>
+                            <li>256GB SSD Storage</li>
+                            <li>13.3-inch Retina Display</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card used-product" onclick="openProductPage('used-gaming-pc')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Used Gaming PC">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Pre-Owned</span>
+                        <h3 class="product-name">Used Gaming Desktop</h3>
+                        <div class="product-price">$899.99</div>
+                        <ul class="product-features">
+                            <li>Intel Core i5-10400F</li>
+                            <li>NVIDIA GeForce GTX 1660 Super</li>
+                            <li>16GB RAM, 512GB SSD + 1TB HDD</li>
+                            <li>RGB Lighting, Windows 11</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card used-product" onclick="openProductPage('used-monitor')">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Used Monitor">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Pre-Owned</span>
+                        <h3 class="product-name">Used 27" Gaming Monitor</h3>
+                        <div class="product-price">$199.99</div>
+                        <ul class="product-features">
+                            <li>27-inch IPS Display</li>
+                            <li>144Hz Refresh Rate</li>
+                            <li>1ms Response Time</li>
+                            <li>AMD FreeSync Technology</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">Add to Cart</button>
+                            <button class="wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Rotech Computers</h3>
+                    <p>Your trusted technology partner for all your computing needs. We provide quality products and exceptional service.</p>
+                    <div class="social-icons" style="margin-top: 20px;">
+                        <a href="https://www.facebook.com/share/1HRkgRrQqf/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/rotech_technologies?igsh=eWRxMzkxa241NWl4"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@rotech.computer.t?_r=1&_t=ZS-91CHZNAsZg0"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Custom PC Building</a></li>
+                        <li><a href="#">Computer Repair</a></li>
+                        <li><a href="#">Data Recovery</a></li>
+                        <li><a href="#">Virus Removal</a></li>
+                        <li><a href="#">Hardware Upgrades</a></li>
+                        <li><a href="#">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Digital City, DC 12345</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@rotechcomputers.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-7PM, Sat: 10AM-5PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Rotech Computers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelector('.slides');
+            const dots = document.querySelectorAll('.slider-dot');
+            let currentSlide = 0;
+            
+            function showSlide(n) {
+                slides.style.transform = `translateX(-${n * 20}%)`;
+                
+                // Update active dot
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[n].classList.add('active');
+                
+                currentSlide = n;
+            }
+            
+            // Auto slide change - faster (3 seconds)
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % 5;
+                showSlide(currentSlide);
+            }, 3000); // Changed from 5000 to 3000 for faster transition
+            
+            // Dot click events
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+            
+            // About section carousel functionality
+            const aboutImages = document.querySelectorAll('.about-img');
+            const aboutDots = document.querySelectorAll('.about-carousel-dot');
+            let currentAboutImage = 0;
+            
+            function showAboutImage(n) {
+                // Hide all images
+                aboutImages.forEach(img => {
+                    img.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                aboutDots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show the selected image and activate its dot
+                aboutImages[n].classList.add('active');
+                aboutDots[n].classList.add('active');
+                
+                currentAboutImage = n;
+            }
+            
+            // Auto change about images every 4 seconds
+            setInterval(() => {
+                currentAboutImage = (currentAboutImage + 1) % aboutImages.length;
+                showAboutImage(currentAboutImage);
+            }, 4000);
+            
+            // Dot click events for about carousel
+            aboutDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showAboutImage(index);
+                });
+            });
+            
+            // Product filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const newProducts = document.querySelectorAll('.new-product');
+            const usedProducts = document.querySelectorAll('.used-product');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filter = btn.getAttribute('data-filter');
+                    
+                    if (filter === 'new') {
+                        // Show new products, hide used products
+                        newProducts.forEach(product => {
+                            product.style.display = 'block';
+                        });
+                        usedProducts.forEach(product => {
+                            product.style.display = 'none';
+                        });
+                    } else if (filter === 'used') {
+                        // Show used products, hide new products
+                        newProducts.forEach(product => {
+                            product.style.display = 'none';
+                        });
+                        usedProducts.forEach(product => {
+                            product.style.display = 'block';
+                        });
+                    }
+                });
+            });
+            
+            // Initially show only new products
+            usedProducts.forEach(product => {
+                product.style.display = 'none';
+            });
+        });
+        
+        // Function to open product page (placeholder)
+        function openProductPage(productId) {
+            // In a real implementation, this would navigate to a product detail page
+            alert(`Opening product page for: ${productId}`);
+            // window.location.href = `/product/${productId}`;
+        }
+    </script>
+</body>
+</html>

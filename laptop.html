@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotech Computers - Laptops</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4dabf7;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin: 0 15px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #4dabf7;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #4dabf7;
+        }
+
+        /* Laptop Page Styles */
+        .laptop-page {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #4dabf7;
+        }
+
+        .laptop-filters {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .laptop-filter-btn {
+            background-color: white;
+            border: 2px solid #4dabf7;
+            color: #4dabf7;
+            padding: 15px 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .laptop-filter-btn.active, .laptop-filter-btn:hover {
+            background-color: #4dabf7;
+            color: white;
+        }
+
+        .laptops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .laptop-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .laptop-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .laptop-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .laptop-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .laptop-card:hover .laptop-img img {
+            transform: scale(1.1);
+        }
+
+        .laptop-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .laptop-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .laptop-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #4dabf7;
+            margin-bottom: 15px;
+        }
+
+        .laptop-stock {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .stock-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .in-stock {
+            background-color: #e7f5ff;
+            color: #4dabf7;
+        }
+
+        .out-of-stock {
+            background-color: #ffe3e3;
+            color: #ff6b6b;
+        }
+
+        /* Product Detail Page */
+        .product-detail-page {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .product-detail-page.active {
+            display: block;
+        }
+
+        .back-btn {
+            background-color: #4dabf7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #339af0;
+        }
+
+        .product-detail {
+            display: flex;
+            gap: 40px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-detail-img {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .product-detail-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-detail-info {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .product-detail-name {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+
+        .product-detail-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4dabf7;
+            margin-bottom: 20px;
+        }
+
+        .product-detail-description {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .product-detail-specs {
+            margin-bottom: 20px;
+        }
+
+        .product-detail-specs h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+
+        .product-detail-specs ul {
+            list-style: none;
+        }
+
+        .product-detail-specs li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .product-detail-specs li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4dabf7;
+            font-weight: bold;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .add-to-cart {
+            background-color: #4dabf7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #339af0;
+        }
+
+        .wishlist {
+            background-color: transparent;
+            border: 1px solid #ddd;
+            color: #666;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wishlist:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a2e;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #4dabf7;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #4dabf7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #4dabf7;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: #4dabf7;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .product-detail {
+                flex-direction: column;
+            }
+            
+            .product-detail-img {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .laptop-filters {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .laptop-filter-btn {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .product-detail-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <!-- Placeholder for logo - replace with actual logo -->
+                <div style="width: 50px; height: 50px; background: #4dabf7; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 20px;">RC</div>
+                <h1>Rotech Computers</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#" class="laptops-link">Laptops</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Laptops Page -->
+        <section class="laptop-page container">
+            <div class="section-title">
+                <h2>Our Laptops</h2>
+                <p>Find the perfect laptop for your needs</p>
+            </div>
+            
+            <div class="laptop-filters">
+                <button class="laptop-filter-btn active" data-filter="used">Used Laptops</button>
+                <button class="laptop-filter-btn" data-filter="new">Brand New Laptops</button>
+            </div>
+            
+            <div class="laptops-grid">
+                <!-- Used Laptops -->
+                <div class="laptop-card used-laptop" data-id="used-dell-xps">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="Dell XPS 13">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">Dell XPS 13 - Refurbished</h3>
+                        <div class="laptop-price">$699.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator in-stock">In Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="laptop-card used-laptop" data-id="used-macbook-air">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Air">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">Apple MacBook Air M1 - Used</h3>
+                        <div class="laptop-price">$799.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator in-stock">In Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="laptop-card used-laptop" data-id="used-hp-spectre">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="HP Spectre">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">HP Spectre x360 - Refurbished</h3>
+                        <div class="laptop-price">$899.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator out-of-stock">Out of Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="laptop-card used-laptop" data-id="used-lenovo-thinkpad">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Lenovo ThinkPad">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">Lenovo ThinkPad X1 Carbon - Used</h3>
+                        <div class="laptop-price">$649.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator in-stock">In Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Laptops -->
+                <div class="laptop-card new-laptop" data-id="new-rog-strix">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="ROG Strix">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">ASUS ROG Strix Gaming Laptop</h3>
+                        <div class="laptop-price">$1,299.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator in-stock">In Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="laptop-card new-laptop" data-id="new-macbook-pro">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80" alt="MacBook Pro">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">Apple MacBook Pro 16"</h3>
+                        <div class="laptop-price">$2,399.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator in-stock">In Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="laptop-card new-laptop" data-id="new-dell-xps">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Dell XPS 15">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">Dell XPS 15 - Latest Model</h3>
+                        <div class="laptop-price">$1,899.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator in-stock">In Stock</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="laptop-card new-laptop" data-id="new-lenovo-yoga">
+                    <div class="laptop-img">
+                        <img src="https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Lenovo Yoga">
+                    </div>
+                    <div class="laptop-info">
+                        <h3 class="laptop-name">Lenovo Yoga 9i 2-in-1</h3>
+                        <div class="laptop-price">$1,499.99</div>
+                        <div class="laptop-stock">
+                            <span class="stock-indicator out-of-stock">Out of Stock</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Detail Page -->
+        <section class="product-detail-page container">
+            <button class="back-btn">← Back to Laptops</button>
+            <div class="product-detail">
+                <div class="product-detail-img">
+                    <img id="detail-img" src="" alt="Laptop">
+                </div>
+                <div class="product-detail-info">
+                    <h2 id="detail-name" class="product-detail-name"></h2>
+                    <div id="detail-price" class="product-detail-price"></div>
+                    <div id="detail-stock" class="laptop-stock"></div>
+                    
+                    <p id="detail-description" class="product-detail-description"></p>
+                    
+                    <div class="product-detail-specs">
+                        <h3>Specifications</h3>
+                        <ul id="detail-specs"></ul>
+                    </div>
+                    
+                    <div class="product-detail-actions">
+                        <button class="add-to-cart">Add to Cart</button>
+                        <button class="wishlist"><i class="far fa-heart"></i> Add to Wishlist</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Rotech Computers</h3>
+                    <p>Your trusted technology partner for all your computing needs. We provide quality products and exceptional service.</p>
+                    <div class="social-icons" style="margin-top: 20px;">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="laptop.html" class="laptops-link">Laptops</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Custom PC Building</a></li>
+                        <li><a href="#">Computer Repair</a></li>
+                        <li><a href="#">Data Recovery</a></li>
+                        <li><a href="#">Virus Removal</a></li>
+                        <li><a href="#">Hardware Upgrades</a></li>
+                        <li><a href="#">IT Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Digital City, DC 12345</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@rotechcomputers.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-7PM, Sat: 10AM-5PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Rotech Computers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Laptop data
+        const laptopData = {
+            'used-dell-xps': {
+                name: 'Dell XPS 13 - Refurbished',
+                price: '$699.99',
+                image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80',
+                stock: 'in-stock',
+                description: 'This refurbished Dell XPS 13 offers premium performance in a compact design. Perfect for professionals and students who need power on the go.',
+                specs: [
+                    'Intel Core i5-1135G7 Processor',
+                    '8GB LPDDR4x RAM',
+                    '512GB PCIe NVMe SSD',
+                    '13.4" FHD+ (1920 x 1200) InfinityEdge Display',
+                    'Intel Iris Xe Graphics',
+                    'Windows 11 Pro',
+                    'Up to 14 hours battery life'
+                ]
+            },
+            'used-macbook-air': {
+                name: 'Apple MacBook Air M1 - Used',
+                price: '$799.99',
+                image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80',
+                stock: 'in-stock',
+                description: 'Experience the power of Apple Silicon with this used MacBook Air featuring the revolutionary M1 chip. Perfect for everyday tasks and creative work.',
+                specs: [
+                    'Apple M1 Chip with 8-core CPU',
+                    '8GB Unified Memory',
+                    '256GB SSD Storage',
+                    '13.3-inch Retina Display',
+                    '7-core GPU',
+                    'macOS',
+                    'Up to 18 hours battery life'
+                ]
+            },
+            'used-hp-spectre': {
+                name: 'HP Spectre x360 - Refurbished',
+                price: '$899.99',
+                image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80',
+                stock: 'out-of-stock',
+                description: 'This refurbished HP Spectre x360 combines power and versatility with its 2-in-1 design. Perfect for both work and entertainment.',
+                specs: [
+                    'Intel Core i7-1165G7 Processor',
+                    '16GB RAM',
+                    '512GB PCIe NVMe SSD',
+                    '13.3" FHD (1920 x 1080) Touch Display',
+                    'Intel Iris Xe Graphics',
+                    'Windows 11 Home',
+                    'Up to 17 hours battery life'
+                ]
+            },
+            'used-lenovo-thinkpad': {
+                name: 'Lenovo ThinkPad X1 Carbon - Used',
+                price: '$649.99',
+                image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+                stock: 'in-stock',
+                description: 'This used Lenovo ThinkPad X1 Carbon is built for business with its durable design and reliable performance. A trusted companion for professionals.',
+                specs: [
+                    'Intel Core i5-10210U Processor',
+                    '8GB RAM',
+                    '256GB SSD',
+                    '14" FHD (1920 x 1080) Display',
+                    'Intel UHD Graphics',
+                    'Windows 11 Pro',
+                    'Up to 18.3 hours battery life'
+                ]
+            },
+            'new-rog-strix': {
+                name: 'ASUS ROG Strix Gaming Laptop',
+                price: '$1,299.99',
+                image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80',
+                stock: 'in-stock',
+                description: 'Dominate the competition with the ASUS ROG Strix gaming laptop. Featuring high-performance components and a stunning display for immersive gaming.',
+                specs: [
+                    'Intel Core i7-12700H Processor',
+                    '16GB DDR5 RAM',
+                    '1TB PCIe NVMe SSD',
+                    '15.6" FHD 144Hz Display',
+                    'NVIDIA GeForce RTX 3060',
+                    'Windows 11 Home',
+                    'RGB Keyboard with per-key lighting'
+                ]
+            },
+            'new-macbook-pro': {
+                name: 'Apple MacBook Pro 16"',
+                price: '$2,399.99',
+                image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80',
+                stock: 'in-stock',
+                description: 'The ultimate MacBook Pro for professionals. With the powerful M2 Pro chip, stunning Liquid Retina XDR display, and all-day battery life.',
+                specs: [
+                    'Apple M2 Pro Chip (12-core CPU)',
+                    '16GB Unified Memory',
+                    '1TB SSD Storage',
+                    '16.2-inch Liquid Retina XDR Display',
+                    '19-core GPU',
+                    'macOS',
+                    'Up to 22 hours battery life'
+                ]
+            },
+            'new-dell-xps': {
+                name: 'Dell XPS 15 - Latest Model',
+                price: '$1,899.99',
+                image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80',
+                stock: 'in-stock',
+                description: 'The latest Dell XPS 15 combines stunning design with powerful performance. Perfect for creative professionals and power users.',
+                specs: [
+                    'Intel Core i7-13700H Processor',
+                    '16GB DDR5 RAM',
+                    '1TB PCIe NVMe SSD',
+                    '15.6" 3.5K OLED Display',
+                    'NVIDIA GeForce RTX 4050',
+                    'Windows 11 Pro',
+                    'Up to 14 hours battery life'
+                ]
+            },
+            'new-lenovo-yoga': {
+                name: 'Lenovo Yoga 9i 2-in-1',
+                price: '$1,499.99',
+                image: 'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+                stock: 'out-of-stock',
+                description: 'The Lenovo Yoga 9i is a premium 2-in-1 laptop that adapts to your needs. With its versatile design and powerful performance.',
+                specs: [
+                    'Intel Core i7-1360P Processor',
+                    '16GB LPDDR5 RAM',
+                    '1TB PCIe NVMe SSD',
+                    '14" 2.8K OLED Touch Display',
+                    'Intel Iris Xe Graphics',
+                    'Windows 11 Home',
+                    'Up to 14 hours battery life'
+                ]
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const laptopPage = document.querySelector('.laptop-page');
+            const productDetailPage = document.querySelector('.product-detail-page');
+            const filterBtns = document.querySelectorAll('.laptop-filter-btn');
+            const laptopCards = document.querySelectorAll('.laptop-card');
+            const backBtn = document.querySelector('.back-btn');
+            
+            // Filter functionality
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    laptopCards.forEach(card => {
+                        if (filter === 'all' || card.classList.contains(`${filter}-laptop`)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Show product detail when laptop card is clicked
+            laptopCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const laptopId = this.getAttribute('data-id');
+                    const laptop = laptopData[laptopId];
+                    
+                    if (laptop) {
+                        document.getElementById('detail-img').src = laptop.image;
+                        document.getElementById('detail-name').textContent = laptop.name;
+                        document.getElementById('detail-price').textContent = laptop.price;
+                        
+                        const stockElement = document.getElementById('detail-stock');
+                        stockElement.innerHTML = '';
+                        const stockIndicator = document.createElement('span');
+                        stockIndicator.className = `stock-indicator ${laptop.stock === 'in-stock' ? 'in-stock' : 'out-of-stock'}`;
+                        stockIndicator.textContent = laptop.stock === 'in-stock' ? 'In Stock' : 'Out of Stock';
+                        stockElement.appendChild(stockIndicator);
+                        
+                        document.getElementById('detail-description').textContent = laptop.description;
+                        
+                        const specsList = document.getElementById('detail-specs');
+                        specsList.innerHTML = '';
+                        laptop.specs.forEach(spec => {
+                            const li = document.createElement('li');
+                            li.textContent = spec;
+                            specsList.appendChild(li);
+                        });
+                        
+                        laptopPage.style.display = 'none';
+                        productDetailPage.classList.add('active');
+                    }
+                });
+            });
+            
+            // Back button functionality
+            backBtn.addEventListener('click', function() {
+                productDetailPage.classList.remove('active');
+                laptopPage.style.display = 'block';
+            });
+            
+            // Initially show only used laptops
+            document.querySelector('.laptop-filter-btn[data-filter="used"]').click();
+        });
+    </script>
+</body>
+</html>
